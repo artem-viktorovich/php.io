@@ -332,4 +332,134 @@ if ($name=='Gena' && $age == 20){
 Если стоит оператор || то при выполнении одного из условий, результат true
 ```
 
-продолжить с 9го урока
+<h2>Функции</h2>
+
+{} - "усы" - тело функции
+
+<h4>Аргументы функции</h4>
+Аргументы вставляются в круглые скобки функции
+
+Пример выполнения функции
+
+```
+function sum($a, $b){  
+    $sum = $a + $b;  
+    echo $sum;  
+}  
+  
+sum(5,6);
+```
+
+
+Результат запроса
+
+11
+
+Таким образом, используя аргументы, можно автоматизировать выполнения каких либо задач.
+
+<h4>Возвращаемые функции</h4>
+Возвращаемые функции должны иметь своё имя по конвенции 
+<span style="color: #f3f3f3; display: inline-block;">get</span>  - эта частица в пхп функциях означает, что она делает возврат
+		далее по верблюжей нотации
+
+При return, функция превращается в переменную
+
+```
+function getSum($a, $b){  
+    $sum = $a + $b;  
+    return $sum;  
+}  
+  
+$result = getSum(5,6);  
+echo $result;
+```
+Данная запись используется, когда функция возвращает результат
+<p style="color: red;">ВАЖНО ЗАПОМНИТЬ! - после return функция не отрабатывает</p>
+
+<h2>Классы php</h2>
+
+Классы нужны для новых типов данных, для сохранения, числа, строки, функции, также можно сохранять действия, которые можно сохранять в одну переменную.
+
+<h4>ООП</h4>
+Названия классы пишутся с большой буквы, и обязательно нужно писать - <span style="color: red;">class</span>
+
+```
+class Person {  
+    public $name = 'Artem';  
+}
+```
+
+<span style="color: red;">public</span>  - даёт доступ к переменным и методам
+
+```
+class Person {  
+	public $name = 'Artem';  
+    public $age = 20;  
+    public $isMarried = true;  
+    public function sayHello(){  
+    echo 'Hello';  
+   }  
+}  
+  
+ $person = new Person(); сохранили данные в переменную
+```
+ Для вывода информации с переменной, внутри функции пропишем следующее
+
+```
+ $person = new Person();  
+echo $person->age;
+```
+
+Обращение к конкретной переменной внутри переменной
+
+```
+$person ->sayHello(); - обращение к переменной внутри функции
+```
+
+<h2>Сеттеры и геттеры</h2>
+
+```
+class Person {  
+    public $name = 'Artem';  
+  
+    public $age = 20;  
+  
+    public function setName($name){  
+        $this->name = $name;  данная функция меняет имя в классе при создании нового 
+              объекта
+    }  
+}
+```
+
+<span style="color: red;">$this</span> - это изменение ключа,  чтобы постоянно не  писать <span style="color: red;">$person</span>
+
+<h4>Сеттеры</h4>
+
+<span style="color: red;">set</span> - это приставка для сеттеров setName, setAge и т.д.
+```
+<?php  
+  
+class Person {  
+    public $name = 'Artem';  
+  
+    public $age = 20;  
+  
+    public function setName($name){  
+        $this->name = $name;  
+    }  
+}  
+
+Результат вывода:
+
+ $person = new Person();  
+$person->setName('Anton');  
+echo $person->name ."\n";  
+ $person2 = new Person();  
+$person2->setName('Andrey');  
+echo $person2->name ."\n";  
+ $person3 = new Person();  
+$person3->setName('Anna');  
+echo $person3->name;
+```
+
+<h4>Геттеры</h4>
