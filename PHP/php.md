@@ -728,3 +728,248 @@ echo $person->getName();
 echo $person->getAge();
 ```
 Геттеры ускоряют использование сеттеров
+
+<h2>Конструкторы в классах</h2>
+```
+<?php  
+  
+  
+class person {  
+    public $name = 'Artem';  
+    public $age = 28;  
+    public $hobby = 'swiming';  
+    public $isMarried = 'false';  
+    public function setProperty($name, $age, $hobby){  
+        $this->name = $name;  
+        $this->age = $age;  
+        $this->hobby = $hobby;  
+    }  
+  
+  
+}  
+  
+$person = new Person();  
+  
+$person->setProperty('Anton', 20, 'fishing');  
+echo $person->age;
+```
+Чтобы автоматизировать работу (если понадобится огромное количество объектов), для этого применяют конструкторы
+
+<span style="color: red;">__construct</span> - то же самое, что делали выше. При создании нового объекта, идёт автоматическое обращение к конструктору и при простановке нужных нам аргументов сокращается количество кода.
+В классах есть скрытые скобки, они являются конструктором этого класса.
+
+```
+<?php  
+  
+  
+class person {  
+    public $name = 'Artem';  
+    public $age = 28;  
+    public $hobby = 'swiming';  
+    public $isMarried = 'false';  
+  
+    public function __construct($name, $age, $hobby)  
+    {  
+        $this->name = $name;  
+        $this->age = $age;  
+        $this->hobby = $hobby;  
+    }  
+  
+}  
+  
+$person = new Person('Anton', 20, 'fishing');
+
+echo $person -> name; - вызов
+```
+
+
+<h2>Наследование в php</h2>
+```
+<?php  
+  
+  
+class person  
+{  
+    public $name = 'Anton';  
+    public $age = 28;  
+    public $job = 'Developer';  
+  
+}  
+  
+class Develover extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Develover';  
+    }  
+}  
+  
+class Manager extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Manager';  
+    }  
+}  
+  
+class Director extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Director';  
+    }  
+}  
+  
+  
+$manager = new Manager();  
+echo $manager -> name;
+```
+
+Пишем <span style="color: red;">extends</span> имя класса - таким методом наследуется функция, для ускорения кода, чтобы убрать копипаст.
+
+
+<h2>Наследование с конструктором</h2>
+Чтобы не было повторения, нужно создать конструктор, дабы вводить нужные нам аргументы
+
+```
+<?php  
+  
+  
+class person  
+{  
+    public $name = 'Anton';  
+    public $age = 28;  
+    public $job = 'Developer';  
+  
+    public function __construct($name, $age, $job)  
+    {  
+        $this->name = $name;  
+        $this->age = $age;  
+        $this->job = $job;  
+    }  
+}  
+  
+class Developer extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Develover';  
+    }  
+}  
+  
+class Manager extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Manager';  
+    }  
+}  
+  
+class Director extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Director';  
+    }  
+}  
+  
+  
+$manager = new Manager('Artemon', 28, 'Manager');  
+echo $manager->name;  
+$director = new Director('Stas', 27, 'Director');  
+echo $director->job;  
+$developer = new Developer ('Vlad', 30, 'Developer');  
+echo $developer -> age;
+```
+<h2>Конструктор в классах наследниках</h2>
+```
+<?php  
+  
+  
+class person  
+{  
+    public $name = 'Anton';  
+    public $age = 28;  
+    public $job = 'Developer';  
+  
+    public function __construct($name, $age, $job)  
+    {  
+        $this->name = $name;  
+        $this->age = $age;  
+        $this->job = $job;  
+    }  
+}  
+  
+class Developer extends person  
+{  
+    public $timePerWeek;  
+  
+    public function work()  
+    {  
+        echo 'i work Develover';  
+    }  
+  
+    public function __construct($name, $age, $job, $timePerWeek)  конструктор                   конкретного класс
+    {  
+        parent::__construct($name, $age, $job);  родительский конструктор
+        $this->timePerWeek = $timePerWeek;  нужным параметр
+    }  
+  
+}  
+  
+class Manager extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Manager';  
+    }  
+}  
+  
+class Director extends person  
+{  
+    public function work()  
+    {  
+        echo 'i work Director';  
+    }  
+}  
+  
+  
+$developer = new Developer ('Vlad', 30, 'Developer', 20);  
+echo $developer->timePerWeek;
+```
+
+<h2>Абстрактные классы</h2>
+
+```
+<?php  
+  
+abstract class Person  - запрещаем использовать этот класс, всё что внутри класса, далее экстендится в другие классы, как конструктор для работы аргументов
+{  
+    public $name;  
+    public $age;  
+    public $job;  
+  
+    public function __construct($name, $age, $job)  
+    {  
+        $this->name = $name;  
+        $this->age = $age;  
+        $this->job = $job;  
+    }  
+}  
+  
+class Developer extends Person  
+{  
+    public $timePerWeek;  
+  
+    public function __construct($name, $age, $job, $timePerWeek)  
+    {  
+        $this->timePerWeek = $timePerWeek;  
+        parent::__construct($name, $age, $job);  
+    }  
+}  
+  
+$developoer = new Developer('Victor', 20, 'fishing', 20);  - создаём свои аргументы
+echo $developoer->job;
+```
+
+<h2>Статические методы и свойства в классах</h2>
