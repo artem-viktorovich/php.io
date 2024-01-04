@@ -973,3 +973,118 @@ echo $developoer->job;
 ```
 
 <h2>Статические методы и свойства в классах</h2>
+Статические методы применяются в основном для вычислений.
+```
+<?php  
+  
+class Person  
+{  
+    public static function sum($a, $b)  
+    {  
+        echo $a + $b;  
+    }  
+}  
+  
+Person::sum(10, 20);
+```
+
+Чтобы воспринимать класс как созданные объект, внутри класса создаём статический класс для имени. И для него другие объекты не создаются.
+```
+<?php  
+  
+class Person  
+{  
+	public static $name;  
+    public static function sum($a, $b)  
+    {  
+        echo $a + $b;  
+    }  
+  
+    public static function setName($name)  
+    {  
+        self::$name = $name;  
+    }  
+  
+  
+}  
+Person::setName('Vasiy');  
+  
+Person::sum(10, 10);  
+echo Person::$name;  
+  
+$person = new Person();  
+Person::setName('Gleb');  
+echo Person::$name;
+```
+Чтобы запретить создавать объекты, пишем в классе <span style="color: red;">abstract</span> 
+```
+<?php  
+  
+abstract class Person  
+{  
+    public static $name;  
+    public static function sum($a, $b)  
+    {  
+        echo $a + $b;  
+    }  
+  
+    public static function setName($name)  
+    {  
+        self::$name = $name;  
+    }  
+  
+  
+}  
+Person::setName('Gleb');  
+echo Person::$name;
+```
+В статических классах используется такая запись <span style="font-size: 30px; color: red;">::</span> 
+Вместо <span style="color: red;">this</span> используем <span style="color: red;">self</span>
+
+
+<h2>Интерфейсы в php </h2>
+<span style="color: red;">Интерфейс</span> - список методов, который обязательно нужно реализовать
+
+```
+<?php  
+  
+interface portsmen{  
+    public function run();  
+    public function gym();  
+    public function eat();  
+}
+```
+Создаём класс
+```
+class Gymnast 
+{  
+
+}
+```
+
+Чтобы принимать свойства интерфейса, (экстендиться) применяют <span style="color: red">implements</span>
+```
+<?php  
+  
+interface portsmen  
+{  
+    public function run();  
+  
+    public function gym();  
+  
+    public function eat();  
+}  
+  
+class Gymnast implements portsmen  
+{  
+    public function run(){  
+        echo 'i`m running';  \\вписываем нужные задачи
+    }  
+    public function gym(){  
+        echo 'im gym'; \\вписываем нужные задачи
+    }  
+    public function eat(){  
+        echo 'eat';  \\вписываем нужные задачи
+    }  
+}
+```
