@@ -1088,3 +1088,96 @@ class Gymnast implements portsmen
     }  
 }
 ```
+
+<h2>Уровни доступа в php private, protected, public</h2>
+Разберём уровень доступа <span style="color: red;">public</span>
+
+```
+<?php  
+  
+class Plant{  
+    public $title;  
+    public $color;  
+    public $season;  
+  
+    public function __construct($title, $color, $season)  
+    {  
+        $this->title = $title;  
+        $this->color = $color;  
+        $this->season = $season;  
+    }  
+  
+}  
+  
+class Rosa extends Plant{  
+  
+}  
+  
+$rosa = new Rosa('Rosa', 'red', 'spring');  
+echo $rosa->title;
+```
+
+Это уровень доступа к классам, которым экстендим либо другим php файлам.
+
+Это нужно для регулирования для создания и поддержания кода, чтобы высвечивалось или выделялось нужные части кода. Чтобы вызывать и объекта метод и высвечивались нужные нам варианты.
+
+Свойство <span style="color: red;">private</span> своего роста скрытие от дальнейшего использования.
+
+Создадим объект 
+```
+$plant = new Plant('tulpan', 'purple', 'spring');
+```
+
+При вызове, наш private всё-равно будет скрыт.
+Если внутри класса мы создадим другой класс, то мы будем иметь доступ к свойству
+
+```
+class Plant{  
+    public $title;  
+    private $color;  
+    public $season;  
+  
+    public function __construct($title, $color, $season)  
+    {  
+        $this->title = $title;  
+        $this->color = $color;  
+        $this->season = $season;  
+    }  
+    public function somecalculate()  
+    {  
+        $this->color;  - скрыток свойство
+    }  
+  
+}
+```
+
+Также при вызове <span style="color: red;">protected</span>, это свойство или класс будет скрыт от использования. Но его можно вызвать в классе наследнике
+
+```
+<?php  
+  
+class Plant{  
+    public $title;  
+    protected $color;  
+    public $season;  
+  
+    public function __construct($title, $color, $season)  
+    {  
+        $this->title = $title;  
+        $this->color = $color;  
+        $this->season = $season;  
+    }  
+    private function somecalculate()  
+    {  
+        $this->color;  скрыт
+    }  
+  
+}  
+  
+class Rosa extends Plant{  
+    public function anotherCalc()  
+    {  
+        this->color;  наследуется
+    }  
+}
+```
